@@ -1,10 +1,9 @@
-// src/app/components/auth/adminLoginForm.tsx
 "use client";
 
 import { useState, useEffect } from 'react';
-import { useAdminAuth } from '@/app/hooks/auth/useAdminAuth';
+import Image from "next/image";
+import { useAdminAuth } from '@/hooks/auth/useAdminAuth';
 
-// ✅
 export default function adminLoginForm() {
 
   const [email, setEmail] = useState('');
@@ -13,15 +12,12 @@ export default function adminLoginForm() {
   const [error, setError] = useState<string | null>(null);
   const { login, isLogged } = useAdminAuth();
 
-  // Redirigir si ya está logueado
   useEffect(() => {
     if (isLogged) {
-      console.log('🔁 Redirigiendo a /admin (ya logueado)');
       window.location.href = '/admin/dashboard';
     }
   }, [isLogged]);
 
-  //
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
@@ -29,9 +25,7 @@ export default function adminLoginForm() {
 
     try {
       const result = await login(email, password);
-      
       if (result.success) {
-        console.log('✅ Login exitoso, redirigiendo...');
         window.location.href = '/admin/dashboard';
       } else {
         throw new Error(result.error || 'Error al iniciar sesión');
@@ -43,7 +37,6 @@ export default function adminLoginForm() {
     }
   }
 
-  // Si ya está logueado, mostrar loading breve
   if (isLogged) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-neutral-950">
@@ -52,11 +45,27 @@ export default function adminLoginForm() {
     );
   }
 
-/* *** */
   return (
-    <div className="min-h-screen flex items-center justify-center bg-neutral-950">
-      
-      <div className="w-full max-w-md rounded-2xl border border-neutral-800 bg-neutral-900/70 p-6 shadow-xl border border-yellow-400"  >
+    <div className="min-h-screen flex items-center justify-center bg-cover bg-center"
+  style={{ backgroundImage: "url('/bg-login.png')" }}>
+
+      <div className="w-full max-w-md rounded-2xl bg-neutral-900/70 p-6 shadow-xl border border-yellow-400 relative">
+
+        {/* ====================== LOGO REDONDO ========================== */}
+        <div className="w-full flex justify-center -mt-16 mb-4">
+          <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-yellow-400 shadow-lg">
+            <Image
+              src="/logo.png"
+              alt="Beauty Chic Logo"
+              width={128}
+              height={128}
+              className="object-cover"
+              priority
+            />
+          </div>
+        </div>
+        {/* ============================================================= */}
+
         <h1 className="text-xl font-semibold text-white mb-4 text-center">
           Acceso Administrativo
         </h1>
@@ -71,7 +80,7 @@ export default function adminLoginForm() {
           </div>
         )}
 
-        <form className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <label className="block text-sm">
             <span className="text-neutral-300">Email</span>
             <input
@@ -114,7 +123,7 @@ export default function adminLoginForm() {
             Panel Administrativo Beauty-chic
           </p>
         </div>
-        
+
       </div>
     </div>
   );

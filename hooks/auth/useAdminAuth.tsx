@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext } from "react";
-import { UserPayload, UseAdminAuthReturn } from "@/app/lib/types";
+import { UserPayload, UseAdminAuthReturn } from "@/lib/types";
 import { AdminAuthContext } from "@/app/(admin)/AdminAuthProvider";
 
 export function useAdminAuth(): UseAdminAuthReturn {

@@ -1,5 +1,5 @@
 // 
-import { TokenPayload } from "@/app/lib/types";
+import { TokenPayload } from "@/lib/types";
 
 export class SimpleTokenService {
 

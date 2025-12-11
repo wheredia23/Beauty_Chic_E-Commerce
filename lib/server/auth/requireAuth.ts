@@ -1,7 +1,7 @@
 // lib/server/auth/requireAuth.ts
 import { cookies } from "next/headers";
-import { SimpleTokenService } from "@/app/lib/server/auth/simple-token";
-import { UserPayload, AuthResult } from "@/app/lib/types";
+import { SimpleTokenService } from "@/lib/server/auth/simple-token";
+import { UserPayload, AuthResult } from "@/lib/types";
 
 const COOKIE_NAME = "skatershop-admin-token"; // Pasar al .env o const.ts
 

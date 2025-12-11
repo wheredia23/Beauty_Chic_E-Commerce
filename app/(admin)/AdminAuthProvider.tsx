@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, ReactNode } from "react";
-import { UserPayload, AuthContextType } from "@/app/lib/types";
+import { UserPayload, AuthContextType } from "@/lib/types";
 
 export const AdminAuthContext = createContext<AuthContextType>({
   user: null,
